@@ -1,0 +1,65 @@
+    /* eslint-disable react/no-unescaped-entities */
+/* eslint-disable no-unused-vars */
+"use client"
+import { useEffect, useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
+import Image from "next/image";
+import Link from "next/link";
+import axios from "axios";
+const Services = () => {
+  const [cartes, setCart] = useState([]);
+
+  useEffect(() => {
+    axios.get("/services.json")
+    .then(res =>{
+        setCart(res.data)
+    })
+  }, []);
+
+console.log(cartes)
+  return (
+    <div className="mt-20">
+      <div>
+        <p className="text-xl text-[#FF3811] py-2 font-bold text-center">
+          Services
+        </p>
+        <h1 className="text-4xl text-center font-bold">Our Service Area</h1>
+        <p className="text-x py-3 text-center">
+          The majority have suffered alteration in some form, by injected
+          humour, or randomised <br /> words which don't look even slightly
+          believable.
+        </p>
+      </div>
+      <br />
+      <br />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        {cartes.map((cart) => (
+          <div key={cart._id} className="card lg:w-80 bg-base-100 shadow-xl">
+            <figure className="px-10 pt-10">
+              <Image
+                src={cart.img}
+                width={0}
+                height={0}
+                unoptimized
+                priority
+                alt="loading"
+                className="rounded-xl"
+              />
+            </figure>
+            <div className="card-body ">
+              <h2 className="card-title">{cart.title}</h2>
+              <div className="flex justify-between">
+                <p className="text-[#FF3811] text-xl font-bold"> Price :  ${cart.price}</p>
+                <button  className=" text-[#FF3811]"> <Link href={`/booking/${cart._id}`}><FaArrowRight /></Link></button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <br />
+      <button className="btn btn-outline btn-error lg:ml-[45%]">More Services</button>
+    </div>
+  );
+};
+
+export default Services;
