@@ -1,6 +1,9 @@
 import About from "@/components/About";
 import Banner from "@/components/Banner";
+import Customer from "@/components/Customer";
+import Product from "@/components/Product";
 import Services from "@/components/Services";
+import Team from "@/components/Team";
 import { FaCalendarAlt, FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
@@ -34,6 +37,9 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+            <Product/>
+            <Team/>
+            <Customer/>
     </div>
   );
 }
