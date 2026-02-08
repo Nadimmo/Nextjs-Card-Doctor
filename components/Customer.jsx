@@ -24,7 +24,7 @@ const Customer = () => {
               width={50}
               height={16}
               unoptimized
-              property
+              property="true"
               className="rounded-[50%] bg-base-200"
             />
             <div className='ml-5'>
@@ -50,7 +50,7 @@ const Customer = () => {
               width={50}
               height={16}
               unoptimized
-              property
+              property="true"
               className="rounded-[50%] bg-base-200"
             />
             <div className='ml-5'>

@@ -1,5 +1,5 @@
 "use client"
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -24,6 +24,7 @@ const Navbar = () => {
       </li>
     </>
   );
+
 
   return (
     <div>
@@ -67,15 +68,20 @@ const Navbar = () => {
               <>
                 <p>
                   <span className="uppercase space-x-2">{data?.user?.name}</span>
-                  <Link href="" className="btn btn-info">
+                  <button onClick={() => signOut()}  className="btn btn-info">
                     Sign Out
-                  </Link>{" "}
+                  </button>{" "}
                 </p>
               </>
             ) : (
+              <>
               <Link href={"api/auth/signin?csrf=true"} className="btn btn-info mr-4">
                 Sign in
               </Link>
+              <Link href={"api/auth/register"} className="btn btn-info mr-4">
+                Sign Up
+              </Link>
+              </>
             )}
           </div>
         </div>

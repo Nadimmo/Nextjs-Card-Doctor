@@ -1,3 +1,4 @@
+import client from "@/lib/mongodb";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 export const authOptions = {
@@ -33,11 +34,12 @@ export const authOptions = {
           return null;
         }
         const { email, password } = credentials;
-        const currentUser = await users.find(
-          (user) => parseInt(user.password) === parseInt(password),
-        );
-        console.log(currentUser);
-        if (currentUser) {
+        const currentUser = await client
+          .db("CarPro")
+          .collection("Users")
+          .findOne({ email: email });
+        // console.log(currentUser);
+        if (parseInt(currentUser.password) === parseInt(password)) {
           return currentUser;
         } else {
           return null;
@@ -45,15 +47,20 @@ export const authOptions = {
       },
     }),
   ],
+
+  callback: {
+    async jwt({ token, account, user }) {
+      if (account) {
+        token.accessToken = account.access_token;
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, user, token }) {
+      return session;
+    },
+  },
 };
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
-const users = [
-  {
-    name: "nadim mostofa",
-    password: 1969120,
-    email: "nadimmostafa334@gmail.com",
-  },
-  { name: "mostofa", password: 1969120, email: "n@gmail.com" },
-];

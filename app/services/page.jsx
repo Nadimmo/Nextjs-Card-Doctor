@@ -36,16 +36,16 @@ const Services = () => {
 
   {/* Services Grid */}
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-    {cartes.map((cart) => (
+    {cartes?.map((cart) => (
       <div
-        key={cart.id}
+        key={cart?.id}
         className="card bg-base-100 shadow-lg hover:shadow-2xl transition-all duration-300 group"
       >
         {/* Image */}
         <figure className="px-4 pt-4">
           <Image
-            src={cart.img}
-            alt={cart.title}
+            src={cart?.img}
+            alt={cart?.title}
             width={400}
             height={260}
             className="rounded-2xl object-cover w-full h-56 group-hover:scale-105 transition-transform duration-300"
@@ -57,16 +57,16 @@ const Services = () => {
         {/* Card Body */}
         <div className="card-body px-6">
           <h2 className="card-title text-lg font-bold">
-            {cart.title}
+            {cart?.title}
           </h2>
 
           <div className="flex items-center justify-between mt-4">
             <p className="text-[#FF3811] text-xl font-bold">
-              $ {cart.price}
+              $ {cart?.price}
             </p>
 
             <Link
-              href={`/services/${cart.id}`}
+              href={`/services/${cart?.id}`}
               className="text-[#FF3811] text-2xl hover:translate-x-1 transition-transform"
             >
               <FaArrowRight />
