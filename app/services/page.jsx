@@ -16,7 +16,6 @@ const Services = () => {
     })
   }, []);
 
-console.log(cartes)
   return (
     <div className="mt-24 mb-12 px-4 lg:px-0">
   {/* Section Header */}

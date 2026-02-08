@@ -7,8 +7,6 @@ const Booking = () => {
   const { id } = useParams();
   const [cartes, setCart] = useState([]);
   const service = cartes.find((cart) => cart.id === id);
-//   const {title, price}  = service
-  console.log(service.title);
 
   useEffect(() => {
     axios.get("/services.json").then((res) => {
@@ -26,7 +24,6 @@ const handleSubmit = (e)=>{
     const info = {
         title,email,price,date
     }
-    console.log(info);
      
 }
 
@@ -51,7 +48,7 @@ const handleSubmit = (e)=>{
                   placeholder="title"
                   className="input input-bordered"
                   required
-                  defaultValue={service.title}
+                  defaultValue={service?.title}
                 />
               </div>
               <div className="form-control">
@@ -87,7 +84,7 @@ const handleSubmit = (e)=>{
                   type="number"
                   className="input input-bordered"
                   required
-                  defaultValue={service.price}
+                  defaultValue={service?.price}
                 />
               </div>
 

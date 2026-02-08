@@ -1,8 +1,9 @@
-import Image from "next/image";
+"use client"
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Navbar = () => {
-    const user = true;
+  const {data} = useSession();
   const Links = (
     <>
       <li>
@@ -23,8 +24,6 @@ const Navbar = () => {
       </li>
     </>
   );
-
- 
 
   return (
     <div>
@@ -64,22 +63,21 @@ const Navbar = () => {
         </div>
         <div className="navbar-end space-x-2">
           <div>
-            {user ? (
+            {data?.user?.email ? (
               <>
                 <p>
-                  {user.displayName}{" "}
-                  <Link href={""} className="btn btn-info" >
+                  <span className="uppercase space-x-2">{data?.user?.name}</span>
+                  <Link href="" className="btn btn-info">
                     Sign Out
                   </Link>{" "}
                 </p>
               </>
             ) : (
-              <Link href={""} className="btn btn-info mr-4" >
+              <Link href={"api/auth/signin?csrf=true"} className="btn btn-info mr-4">
                 Sign in
               </Link>
             )}
           </div>
-          <a className="btn btn-error btn-outline">Appointment</a>
         </div>
       </div>
     </div>
